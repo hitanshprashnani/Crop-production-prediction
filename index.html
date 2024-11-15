@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crop Production Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Crop Production Prediction</h1>
+        <form method="POST" action="/predict">
+            <label for="year">Crop Year:</label>
+            <input type="text" id="year" name="year" required><br>
+
+            <label for="area">Area (in hectares):</label>
+            <input type="text" id="area" name="area" required><br>
+
+            <label for="crop_name">Select Crop Name:</label>
+            <select id="crop_name" name="crop_name" required>
+                {% for crop in crops %}
+                    <option value="{{ crop }}">{{ crop }}</option>
+                {% endfor %}
+            </select><br>
+
+            <button type="submit">Predict</button>
+        </form>
+
+        {% if prediction %}
+            <h2>{{ prediction }}</h2>
+        {% endif %}
+    </div>
+</body>
+</html>
+
+
